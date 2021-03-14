@@ -4,30 +4,52 @@ function isNum(num) {
   return !isNaN(parseFloat(num)) && isFinite(num);
 }
   
-function guessTheNumber() {
-  
-  let luckyNumber = 56;
 
+let count = 0;
+const num =  () => {
+let number = Math.floor(Math.random() * 101);
+return number;
+};
+console.log(num());
+
+function guessTheNumber() {
   let enteredNumber = prompt('Угадай число от 1 до 100');
-  if (enteredNumber === null) {
-    alert('Игра окончена');
-    return enteredNumber;
+  if (enteredNumber === null || count === 10) {
+    let losses = confirm('Попытки закончились, хотите сыграть еще?');
+     if (losses === true) {
+      count = 0;
+      num();
+      guessTheNumber(); 
+     } else {
+        alert('Игра окончена');
+        return ;
+     }
   }
-  
   if (isNum(enteredNumber)) {
     enteredNumber = +enteredNumber;
-     if (luckyNumber === enteredNumber) {
-     alert('Поздравляю, Вы угадали!!!');
-     return enteredNumber;
-    } else if (luckyNumber < enteredNumber) {
-     enteredNumber = alert ('Загаданное число меньше');
-    } else if (luckyNumber > enteredNumber) {
-     enteredNumber = alert ('Загаданное число больше');
+     if (num() === enteredNumber) {
+     let win = confirm('Поздравляю, Вы угадали!!! Хотели бы сыграть еще?');
+     if (win === true) {
+      count = 0;
+      num();
+      guessTheNumber(); 
+     } else {
+      alert('Игра окончена');
+      return ;
+     }
+    } else if (num() < enteredNumber) {
+     enteredNumber = alert ('Загаданное число меньше, осталось ' + (10-count) + ' попыток');
+    } else if (num() > enteredNumber) {
+     enteredNumber = alert ('Загаданное число больше, осталось ' + (10-count) + ' попыток');
     }
  } else {
    alert('Введи число!');
  }
- return guessTheNumber();
+ count+= 1;
+ console.log(count);
+ guessTheNumber();
+ 
 }
 guessTheNumber();
+
 
