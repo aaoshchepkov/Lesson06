@@ -5,7 +5,7 @@ let start = ()=> {
 let toDay = new Date(),
 weekDay = toDay.getDay()-1,
 day = toDay.getDate(),
-month = toDay.getMonth()+1,
+month = toDay.getMonth(),
 year = toDay.getYear() + 1900,
 hour = toDay.getHours(),
 minute = toDay.getMinutes(),
